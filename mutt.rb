@@ -47,7 +47,7 @@ class Mutt < Formula
 
   patch do
     #url "ftp://ftp.openbsd.org/pub/OpenBSD/distfiles/mutt/trashfolder-1.5.22.diff0.gz"
-    # This applies both Trash and Purge patches
+    # My patch applies both Trash and Purge patches
     url 'https://raw.github.com/kuperman/Mutt-Trash-Purge-patch/master/patch-1.5.23.bk.trash_folder-purge_message.1'
     sha1 "d62ff9b88efdd8ef176a988eaeaf545db951daf0"
   end if build.with? "trash-patch"
