@@ -4,6 +4,7 @@ class Mutt < Formula
   homepage 'http://www.mutt.org/'
   url 'ftp://ftp.mutt.org/pub/mutt/mutt-1.5.23.tar.gz'
   sha1 '8ac821d8b1e25504a31bf5fda9c08d93a4acc862'
+  revision 1
 
   head do
     url 'http://dev.mutt.org/hg/mutt#default', :using => :hg
@@ -30,7 +31,7 @@ class Mutt < Formula
   option "with-ignore-thread-patch", "Apply ignore-thread patch"
   option "with-pgp-verbose-mime-patch", "Apply PGP verbose mime patch"
   option "with-confirm-attachment-patch", "Apply confirm attachment patch"
-  option "with-sidebar-patch", "Apply sidebar patch"
+  option "with-sidebar-patch", "Apply sidebar (folder list) patch" unless build.head?
   option "with-gmail-server-search-patch", "Apply gmail server search patch"
   option "with-gmail-labels-patch", "Apply gmail labels patch"
 
@@ -38,17 +39,23 @@ class Mutt < Formula
   depends_on 'tokyo-cabinet'
   depends_on 's-lang' => :optional
   depends_on 'gpgme' => :optional
+  if build.head?
+    depends_on :autoconf
+    depends_on :automake
+  end
 
   patch do
-    url "ftp://ftp.openbsd.org/pub/OpenBSD/distfiles/mutt/trashfolder-1.5.22.diff0.gz"
-    sha1 "c597566c26e270b99c6f57e046512a663d2f415e"
+    #url "ftp://ftp.openbsd.org/pub/OpenBSD/distfiles/mutt/trashfolder-1.5.22.diff0.gz"
+    # This applies both Trash and Purge patches
+    url 'https://raw.github.com/kuperman/Mutt-Trash-Purge-patch/master/patch-1.5.23.bk.trash_folder-purge_message.1'
+    sha1 "d62ff9b88efdd8ef176a988eaeaf545db951daf0"
   end if build.with? "trash-patch"
 
   # original source for this went missing, patch sourced from Arch at
   # https://aur.archlinux.org/packages/mutt-ignore-thread/
   patch do
-    url "https://gist.github.com/mistydemeo/5522742/raw/1439cc157ab673dc8061784829eea267cd736624/ignore-thread-1.5.21.patch"
-    sha1 "dbcf5de46a559bca425028a18da0a63d34f722d3"
+    url 'https://gist.github.com/mistydemeo/5522742/raw/1439cc157ab673dc8061784829eea267cd736624/ignore-thread-1.5.21.patch'
+    sha1 'dbcf5de46a559bca425028a18da0a63d34f722d3'
   end if build.with? "ignore-thread-patch"
 
   patch do
@@ -62,17 +69,17 @@ class Mutt < Formula
   end if build.with? "confirm-attachment-patch"
 
   patch do
-    url "https://github.com/sgeb/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/mutt-sidebar.patch"
+    url "https://github.com/kuperman/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/mutt-sidebar.patch"
     sha1 "1e151d4ff3ce83d635cf794acf0c781e1b748ff1"
   end if build.with? "sidebar-patch"
 
   patch :p0 do
-    url "https://github.com/sgeb/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/patch-mutt-gmailcustomsearch.v1.patch"
+    url "https://github.com/kuperman/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/patch-mutt-gmailcustomsearch.v1.patch"
     sha1 "851051cd37778d71a86510a888d4572475ed269d"
   end if build.with? "gmail-server-search-patch"
 
   patch do
-    url "https://github.com/sgeb/homebrew-mutt/raw/231547c95422db3aa834383fd01f1464f99db228/patches/mutt-1.5.23-gmail-labels.sgeb.v1.patch"
+    url "https://github.com/kuperman/homebrew-mutt/raw/231547c95422db3aa834383fd01f1464f99db228/patches/mutt-1.5.23-gmail-labels.sgeb.v1.patch"
     sha1 "93a26c66ebd602775f879278c283ee524f477195"
   end if build.with? "gmail-labels-patch"
 

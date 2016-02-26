@@ -1,6 +1,6 @@
 # homebrew-mutt
 
-Convenience repo with my customizations to the mutt formula for homebrew.
+Convenience repo with my customizations to the mutt formula for homebrew.  Based on [sgeb/homebrew-mutt](https://github.com/sgeb/homebrew-mutt/).
 
 The following patches were added:
 
@@ -35,13 +35,13 @@ that version first:
 Then proceed with installation based on custom formula:
 
 ```bash
-> brew tap sgeb/mutt
+> brew tap kuperman/mutt
 # There will be a warning regarding overriding existing formula 'mutt'
 
-> brew options sgeb/mutt/mutt
+> brew options kuperman/mutt/mutt
 # List of available options
 
-> brew install sgeb/mutt/mutt --with-trash-patch \
+> brew install kuperman/mutt/mutt --with-trash-patch \
   --with-sidebar-patch --with-gmail-server-search-patch \
   --with-gmail-labels-patch
 # Compile and install customized mutt
