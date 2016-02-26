@@ -22,8 +22,9 @@ class Mutt < Formula
       :because => 'mutt installs a private copy of pgpring'
   end
 
-  conflicts_with 'tin',
-    :because => 'both install mmdf.5 and mbox.5 man pages'
+  # trying to rename
+  #conflicts_with 'tin',
+  #  :because => 'both install mmdf.5 and mbox.5 man pages'
 
   option "with-debug", "Build with debug option enabled"
   option "with-trash-patch", "Apply trash folder patch"
@@ -106,6 +107,12 @@ class Mutt < Formula
       args << "--enable-debug"
     else
       args << "--disable-debug"
+    end
+
+    # Fix filename conflicts
+    inreplace ["doc/Makefile.in", "doc/Makefile.am"] do |s|
+        s.gsub! "mmdf.5", "mmdf-mutt.5"
+        s.gsub! "mbox.5", "mbox-mutt.5"
     end
 
     if build.head?
