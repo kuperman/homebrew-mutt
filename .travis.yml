@@ -1,0 +1,27 @@
+# Build is for Mac Homebrew
+os: osx
+language: c
+
+#language: objective-c
+
+before_install:
+  - brew update
+
+install:
+  - mkdir -p $(brew --repo)/Library/Taps/kuperman-travis
+  - ln -s $PWD $(brew --repo)/Library/Taps/kuperman-travis/
+  - brew tap --repair
+
+env:
+# - PATCH=trash
+# - PATCH=ignore-thread
+# - PATCH=pgp-verbose-mime
+# - PATCH=sidebar
+# - PATCH=gmail-server-search
+  - PATCH=gmail-labels
+# - PATCH=forwref
+
+script:
+  - brew audit kuperman-travis/mutt/mutt
+  - brew install -v kuperman-travis/mutt/mutt --with-$PATCH-patch
+  - brew test kuperman-travis/mutt/mutt
