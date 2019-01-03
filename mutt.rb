@@ -7,8 +7,8 @@ class Mutt < Formula
   #mirror "ftp://ftp.mutt.org/pub/mutt/mutt-1.5.24.tar.gz"
   #sha256 "a292ca765ed7b19db4ac495938a3ef808a16193b7d623d65562bb8feb2b42200"
   url 'ftp://ftp.mutt.org/pub/mutt/mutt-1.5.23.tar.gz'
-  sha1 '8ac821d8b1e25504a31bf5fda9c08d93a4acc862'
-  revision 1
+  sha256 '3af0701e57b9e1880ed3a0dee34498a228939e854a16cdccd24e5e502626fd37'
+  revision 2
 
   head do
     url "http://dev.mutt.org/hg/mutt#default", :using => :hg
@@ -55,7 +55,7 @@ class Mutt < Formula
     #url "ftp://ftp.openbsd.org/pub/OpenBSD/distfiles/mutt/trashfolder-1.5.22.diff0.gz"
     # My patch applies both Trash and Purge patches
     url 'https://raw.github.com/kuperman/Mutt-Trash-Purge-patch/master/patch-1.5.23.bk.trash_folder-purge_message.1'
-    sha1 "d62ff9b88efdd8ef176a988eaeaf545db951daf0"
+    sha256 '6127d21f701b2a5d63aa910ae48e232504ec456e346dd2c370b6c5c244cc2b9e'
   end if build.with? "trash-patch"
 
   # original source for this went missing, patch sourced from Arch at
@@ -75,23 +75,23 @@ class Mutt < Formula
   end
 
   patch do
-    url "http://patch-tracker.debian.org/patch/series/dl/mutt/1.5.21-6.2+deb7u1/features-old/patch-1.5.4.vk.pgp_verbose_mime"
-    sha1 "a436f967aa46663cfc9b8933a6499ca165ec0a21"
+    url "https://raw.githubusercontent.com/kuperman/homebrew-mutt/master/patches/patch-1.5.4.vk.pgp_verbose_mime"
+    sha256 'fbd58cd5466c71e39a3854dc6b91e05ac7ea410eec49148a0eb6ef8aa584789b'
   end if build.with? "pgp-verbose-mime-patch"
 
   patch do
     url "https://github.com/kuperman/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/mutt-sidebar.patch"
-    sha1 "1e151d4ff3ce83d635cf794acf0c781e1b748ff1"
+    sha256 'de592f9eeae458cac8de15a22230b3b426da71a62369617030a84787ccb08712'
   end if build.with? "sidebar-patch"
 
   patch :p0 do
     url "https://github.com/kuperman/homebrew-mutt/raw/c68c72bf2824b571b56c63aee597a43fb12b7705/patches/patch-mutt-gmailcustomsearch.v1.patch"
-    sha1 "851051cd37778d71a86510a888d4572475ed269d"
+    sha256 'de0ed37985b254ed365539808ec99be4ff904dbf32e4ab4baae0309bfa38ca77'
   end if build.with? "gmail-server-search-patch"
 
   patch do
     url "https://github.com/kuperman/homebrew-mutt/raw/231547c95422db3aa834383fd01f1464f99db228/patches/mutt-1.5.23-gmail-labels.sgeb.v1.patch"
-    sha1 "93a26c66ebd602775f879278c283ee524f477195"
+    sha256 '2b80584e0e799d798f250f6559d6f9bb517ac4a7c47e739318eb8263c8f67a7c'
   end if build.with? "gmail-labels-patch"
 
   def install
