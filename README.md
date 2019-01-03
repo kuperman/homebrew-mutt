@@ -1,5 +1,8 @@
 # homebrew-mutt
 
+[![Build
+Status](https://travis-ci.org/kuperman/homebrew-mutt.svg?branch=master)](https://travis-ci.org/kuperman/homebrew-mutt)
+
 Convenience repo with my customizations to the mutt formula for homebrew.  Based on [sgeb/homebrew-mutt](https://github.com/sgeb/homebrew-mutt/).
 
 The following patches were added:
