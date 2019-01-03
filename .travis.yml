@@ -10,6 +10,8 @@ before_install:
 install:
   - mkdir -p $(brew --repo)/Library/Taps/kuperman-travis
   - ln -s $PWD $(brew --repo)/Library/Taps/kuperman-travis/
+  - ls -d $(brew --repo)/Library/Taps/kuperman-travis/
+  - ls  $(brew --repo)/Library/Taps/kuperman-travis/
   - brew tap --repair
 
 env:
