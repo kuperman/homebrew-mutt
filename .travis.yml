@@ -13,6 +13,7 @@ install:
   - ls -d $(brew --repo)/Library/Taps/kuperman-travis/
   - ls  $(brew --repo)/Library/Taps/kuperman-travis/
   - brew tap --repair
+  - brew tap
 
 env:
 # - PATCH=trash
