@@ -1,30 +1,21 @@
-# Build is for Mac Homebrew
-os: osx
 language: c
-
-#language: objective-c
+os: osx
+compiler: clang
+osx_image: xcode9.2
+cache:
+  directories:
+    - /usr/local/Homebrew/Library/Homebrew/vendor/bundle
+branches:
+  only:
+    - master
 
 before_install:
-  - brew update
-
-install:
-  - mkdir -p $(brew --repo)/Library/Taps/kuperman-travis
-  - ln -s $PWD $(brew --repo)/Library/Taps/kuperman-travis/
-  - ls -d $(brew --repo)/Library/Taps/kuperman-travis/
-  - ls  $(brew --repo)/Library/Taps/kuperman-travis/
-  - brew tap --repair
-  - brew tap
-
-env:
-# - PATCH=trash
-# - PATCH=ignore-thread
-# - PATCH=pgp-verbose-mime
-# - PATCH=sidebar
-# - PATCH=gmail-server-search
-  - PATCH=gmail-labels
-# - PATCH=forwref
+  - sudo chown -R "$USER" "$(brew --repo)"
+  - travis_retry brew update
+  - HOMEBREW_TAP_DIR="$(brew --repo "$TRAVIS_REPO_SLUG")"
+  - mkdir -p "$HOMEBREW_TAP_DIR"
+  - rm -rf "$HOMEBREW_TAP_DIR"
+  - ln -s "$PWD" "$HOMEBREW_TAP_DIR"
 
 script:
-  - brew audit kuperman-travis/mutt
-  - brew install -v kuperman-travis/mutt --with-$PATCH-patch
-  - brew test kuperman-travis/mutt
+  - brew test-bot
