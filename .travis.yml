@@ -25,6 +25,6 @@ env:
 # - PATCH=forwref
 
 script:
-  - brew audit kuperman-travis/mutt/mutt
-  - brew install -v kuperman-travis/mutt/mutt --with-$PATCH-patch
-  - brew test kuperman-travis/mutt/mutt
+  - brew audit kuperman-travis/mutt
+  - brew install -v kuperman-travis/mutt --with-$PATCH-patch
+  - brew test kuperman-travis/mutt
