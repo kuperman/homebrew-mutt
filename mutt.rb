@@ -14,7 +14,8 @@ class Mutt < Formula
     url "http://dev.mutt.org/hg/mutt#default", :using => :hg
 
     resource "html" do
-      url "http://dev.mutt.org/doc/manual.html", :using => :nounzip
+      #url "http://dev.mutt.org/doc/manual.html", :using => :nounzip
+      url "https://muttmua.gitlab.io/mutt/manual-dev.html"
     end
   end
 
